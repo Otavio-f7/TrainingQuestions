@@ -52,7 +52,6 @@ class _AppQuestionsState extends State<AppQuestions> {
           )
         ],),
       ),
-
     );
   }
 }
