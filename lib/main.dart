@@ -13,6 +13,10 @@ class AppQuestions extends StatefulWidget {
 }
 
 class _AppQuestionsState extends State<AppQuestions> {
+
+  var n1 = TextEditingController();
+  var n2 = TextEditingController();
+  String num = '0';
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -28,31 +32,77 @@ class _AppQuestionsState extends State<AppQuestions> {
             fontSize: 28,
             ),
         ),
-        body: Column(children: <Widget>[
-          // ignore: sized_box_for_whitespace
-          Container(
-            width: double.infinity,
-            child: const Text(
-              'Adcionando um botão',
-              style: TextStyle(fontSize: 18)
-            ),
-          ),
-          Container(
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: null, 
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
-              child: const Text('Press',
-                style: TextStyle( 
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children:<Widget>[
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                border: Border.all(
                   color: Colors.black,
-                  fontSize: 20,
-                  ),
-              )
+                  width: 2
+                 )
               ),
-          )
-        ],),
+              child: Column(
+                children: [
+                  TextField(
+                    controller: n1,
+                    decoration: const InputDecoration(
+                      labelText: ' Primeiro Numero'),
+                    ),
+                  TextField(
+                    controller: n2,
+                    decoration: const InputDecoration(
+                      labelText: ' Segundo Numero'),
+                    ),
+                  ElevatedButton(
+                    onPressed: () { 
+                      setState(() {
+                       num = (n1.text + n2.text).toString();
+                      });
+                    }, 
+                    style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
+                    child: const Text('Soma',
+                      style: TextStyle( 
+                        color: Colors.black,
+                        fontSize: 20,
+                        ),
+                    )
+                    ),
+                ],
+              ),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.black,
+                  width: 2,
+                ),
+              ),
+              padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+              width: double.infinity,
+              child: Column(
+                children: <Widget>[
+                  Resultado(num),
+                ],
+              )
+            )
+          ],
+        ),
       ),
     );
+  }
+}
+
+
+class Resultado extends StatelessWidget {
+  late String numero;
+  Resultado(this.numero, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text('O resultado é : $numero');
   }
 }
 
